@@ -10,6 +10,20 @@ const ulItens = document.getElementById("lista-de-itens");
 
 const ulItensComprados = document.getElementById("itens-comprados");
 
+const listaRecuperada = localStorage.getItem('listaDeItens');
+
+
+function atualizaLocalStorage(){
+    localStorage.setItem('listaDeItens' , JSON.stringify(listaDeItens))
+}
+
+if(listaRecuperada){
+    listaDeItens = JSON.parse(listaRecuperada)
+    mostrarItens()
+}else{
+    listaDeItens = []
+}
+
 form.addEventListener("submit" , function(evento){
     evento.preventDefault();
     salvarItem();
@@ -101,6 +115,8 @@ function mostrarItens(){
             console.log(listaDeItens)
         })
     })
+
+    atualizaLocalStorage()
 }
 
 function salvarEdicao(){
